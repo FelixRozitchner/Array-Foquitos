@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FoquitoScript : MonoBehaviour
 {
-    [SerializeField] GameObject[] colors;
+    public GameObject[] colors;
     public int currentLightIndex =-1;
 
     void Start()
@@ -21,12 +21,12 @@ public class FoquitoScript : MonoBehaviour
     public void ActivateNextLight()
     {
         currentLightIndex++;
-        if (currentLightIndex >= colors.Length)
+        if (currentLightIndex >= colors.Length) //"Si te pasaste"
         {
-            currentLightIndex = 0;
+            currentLightIndex = 0;//"Volve a 0"
         }
         DeactivateAllLights();
-        colors[currentLightIndex].SetActive(true);
+        colors[currentLightIndex].SetActive(true);//Va prendiendo el foquito indicado a partir de su indice de array
     }
 
     public void ActivatePreviousLight()
@@ -42,9 +42,9 @@ public class FoquitoScript : MonoBehaviour
 
     void DeactivateAllLights()
     {
-        foreach (GameObject g in colors)
+        for(int i = 0; i< colors.Length; i++)
         {
-            g.SetActive(false);
+            colors[i].SetActive(false);
         }
     }
 
