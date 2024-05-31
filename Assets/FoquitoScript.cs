@@ -6,7 +6,7 @@ public class FoquitoScript : MonoBehaviour
 {
     public GameObject[] colors;
     public int currentLightIndex = -1;
-    int vueltasLuces = 0;
+    int vueltasLuces = 15;
 
     void Start()
     {
@@ -21,17 +21,20 @@ public class FoquitoScript : MonoBehaviour
 
     public void ActivateNextLight()
     {
-        currentLightIndex++;
-        vueltasLuces++;
-        if (currentLightIndex >= colors.Length) //"Si te pasaste"
+        if (vueltasLuces >= 0)
         {
-            currentLightIndex = 0;//"Volve a 0"
+            currentLightIndex++;
+            vueltasLuces--;
+            if (currentLightIndex >= colors.Length) //"Si te pasaste"
+            {
+                currentLightIndex = 0;//"Volve a 0"
+            }
+            DeactivateAllLights();
+            colors[currentLightIndex].SetActive(true);//Va prendiendo el foquito indicado a partir de su indice de array
         }
-        DeactivateAllLights();
-        colors[currentLightIndex].SetActive(true);//Va prendiendo el foquito indicado a partir de su indice de array
-        if (vueltasLuces == 15)
+        else
         {
-            ();
+            Destroy(this.gameObject);
         }
     }
 
@@ -60,8 +63,6 @@ public class FoquitoScript : MonoBehaviour
         InvokeRepeating(nameof(ActivateNextLight), 0, t);
 
     } 
-
-    public void DestroyAllLights()
 
     
 }
